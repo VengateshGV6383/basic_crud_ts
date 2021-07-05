@@ -73,7 +73,7 @@ const Form = (props) => {
         }
         break;
         case 'USRID':
-          if(value.match("(?=.*[A-Za-z0-9@!#$%^&*]){8,}")){
+          if(value.length>7 && value.match("(?=.*[A-Za-z0-9@!#$%^&*]){8,}")){
             SetNewUser((prevState)=>({
               ...prevState,
               [name]:value
@@ -83,13 +83,16 @@ const Form = (props) => {
           }
           else{
             let errMsg=""
-            if(value.length<7){
-              setErrMsgUSRID("Password must atleast have seven characters");
-            }
+            if(value.length<7)
+              setErrMsgUSRID("Password must atleast have 8 characters");
             else{
-              errMsg=(value.length<8)?(value.match("(?.=*[0-9])")?"Must have one special character":(value.match("?.=*[!|@|#|$|%|^|&|*]"))?"Must have one number":"Must have one Alphabet character"):"Must be greater than 7 digits"
+              if(value.match("(?=.*[0-9]){1,}"))
+                errMsg="Must have atleast one special character";
+              else
+                errMsg="Must contain numbers and special characters "
+              
+             setErrMsgUSRID(errMsg);
             }
-            setErrMsgUSRID(errMsg);
           }
           break;
           case 'Phno':
