@@ -1,13 +1,16 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import Form from "./Form";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
+import Header from "./components/Header";
 
 const App = () => {
   return (
-    <div className="ui segment">
-      <h1>Basic Crud Operations App</h1>
-        <Form formtype="create" />
-    </div>
+    <BrowserRouter>
+      <Header />
+      <Switch>
+        <Route component={} path=""/>
+      </Switch>
+    </BrowserRouter>
   );
 };
 
