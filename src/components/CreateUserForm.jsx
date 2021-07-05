@@ -83,8 +83,8 @@ const Form = (props) => {
           }
           else{
             let errMsg=""
-            if(value.length<7)
-              setErrMsgUSRID("Password must atleast have 8 characters");
+            if(value.length<7 && (value.match("(?=.*[0-9]){1,}")||value.match("(?=.*[!|@|#|$|%|^|&|*]){1,}")) )
+              setErrMsgUSRID("Password must atleast have 8 characters (Alphabets numbers and special characters)");
             else{
               if(value.match("(?=.*[0-9]){1,}"))
                 errMsg="Must have atleast one special character";
