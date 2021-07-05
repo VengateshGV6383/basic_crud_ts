@@ -1,17 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
-import Header from "./components/Header";
+import AppRouter from "./components/AppRouter";
 
 const App = () => {
-  return (
-    <BrowserRouter>
-      <Header />
-      <Switch>
-        <Route component={} path=""/>
-      </Switch>
-    </BrowserRouter>
-  );
+  return <AppRouter />;
 };
 
 ReactDOM.render(<App />, document.querySelector("#root"));

@@ -1,9 +1,15 @@
 import React from 'react';
 import CreateUserForm from './CreateUserForm';
 
- const CreateUser=()=>{
-    const onSubmitForm=()=>{
-        
+ const AddUser=()=>{
+     interface User{
+        Username:string;
+        USRID:string;
+        Phno:number;
+        Mail:string;
+     }
+    const onSubmitForm=(user:User)=>{
+        console.log(user)
     }
      return(
          <React.Fragment>
@@ -11,4 +17,4 @@ import CreateUserForm from './CreateUserForm';
          </React.Fragment>
      )
  }
- export default CreateUser;
+ export default AddUser;
