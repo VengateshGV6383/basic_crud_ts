@@ -11,7 +11,7 @@ const Header = () => {
                 <NavLink to="/Create" >Create</NavLink>
             </div>
             <div style={{margin:"5px"}}>
-            <NavLink to="/ShowUsers">ShowUsers</NavLink>
+            <NavLink to="/Show">ShowUsers</NavLink>
             </div>
             
         </header>
