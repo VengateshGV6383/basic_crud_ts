@@ -1,16 +1,29 @@
 import React,{useState} from "react";
+import { User } from "./AddUser";
 
 import Button from "./button";
 import InputBox from "./InputBoxes";
 
-const Form = (props) => {
+
+interface FormProps {
+  handleFormSubmit: (user: User) => void
+}
+
+const Form = (props: FormProps) => {
   const [user,SetNewUser]=useState({
     Username:'',
     USRID:'',
     Phno:'',
     Mailid:''
   })
-  const fields = [
+  const fields: Array<{
+    id:number,
+    name:"Username"|"USRID"|"Phno"|"Mailid",
+    text:string,
+    type:"text"|"tel"|"email",
+    placeholder:string
+    
+  }>= [
     {id:0, name: "Username", text: "Name",type:"text",placeholder:"Username"},
     {id:1,name: "USRID", text: "Credo-ID",type:"text",placeholder:"Example:xoxo!456" },
     {id:2, name: "Phno", text: "Phone Number",type:"tel",placeholder:"999999999" },
@@ -25,7 +38,7 @@ const {Username,USRID,Phno,Mailid}=user;
 
 
 
-  const onhandleSubmit=(event)=>{
+  const onhandleSubmit=(event: React.FormEvent<HTMLFormElement>)=>{
             event.preventDefault();
             const values=[Username,USRID,Phno,Mailid];
             const noEmptyFields=values.every((field)=>{
@@ -34,7 +47,7 @@ const {Username,USRID,Phno,Mailid}=user;
             })
             let errorMsg=""
             if(noEmptyFields){
-              const newuser={
+              const newuser: User={
                 Username,
                 USRID,
                 Phno,
@@ -53,7 +66,7 @@ const {Username,USRID,Phno,Mailid}=user;
 
 
   
-  const handleInputChange=event=>{
+  const handleInputChange=(event: React.ChangeEvent<HTMLInputElement>)=>{
     const {name,value}=event.target;
     switch(name){
       case 'Username':
@@ -67,7 +80,7 @@ const {Username,USRID,Phno,Mailid}=user;
         }
         else{
           if(value.length<8){
-            setErrMsgUsermname("UserName must be greater than 7");
+            setErrMsgUsermname("UserName must be greater than 7 characters");
           }
               
         }
@@ -87,7 +100,7 @@ const {Username,USRID,Phno,Mailid}=user;
               errMsg="User ID must atleast have 8 characters atleast One uppercase Alphabet,One lowercase numbers and special characters";
            else if(!(value.match("(?=.*[0-9]){1,}"))) 
               errMsg="User ID must have atleast one number";
-            else if(!(value.match(value.match("(?=.*[!|@|#|$|%|^|&|*]){1,}"))))
+            else if(!(value.match("(?=.*[!|@|#|$|%|^|&|*]){1,}")))
               errMsg="User ID must contain atleast one special character"
             else if(!(value.match("[A-Z]")))
               errMsg="User ID must have atleast one Upper Case Alphabet"
@@ -135,7 +148,7 @@ const {Username,USRID,Phno,Mailid}=user;
 
         <form className="ui fluid form" onSubmit={onhandleSubmit}>
         
-        {fields.map(field=>{
+        {fields.map((field)=>{
           return(
             <InputBox 
             key={field.id}

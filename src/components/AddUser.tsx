@@ -1,15 +1,16 @@
 import React from 'react';
 import CreateUserForm from './CreateUserForm';
 
+export interface User{
+   Username:string;
+   USRID:string;
+   Phno:string;
+   Mailid:string;
+}
+
  const AddUser=()=>{
-     interface User{
-        Username:string;
-        USRID:string;
-        Phno:number;
-        Mailid:string;
-     }
     const onSubmitForm=(user:User)=>{
-        console.log(user)
+         console.log(user)
     }
      return(
          <React.Fragment>
