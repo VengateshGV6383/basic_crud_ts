@@ -142,6 +142,7 @@ const {Username,USRID,Phno,Mailid}=user;
             field={field}
             onInputChange={handleInputChange}
             errMsg={errMsgs[field.name]}
+            
             />
           )
         })}
