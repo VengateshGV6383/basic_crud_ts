@@ -14,7 +14,8 @@ const AppRouter = () => {
                 <Route component={ShowList} path="/show"/>
             
         </Switch>
-      </BrowserRouter> );
+      </BrowserRouter> 
+      );
 }
  
 export default AppRouter;

@@ -11,13 +11,13 @@ const Form = (props) => {
     Mailid:''
   })
   const fields = [
-    {id:0, name: "Username", text: "Name",type:"text"},
-    {id:1,name: "USRID", text: "Credo-ID",type:"text"  },
-    {id:2, name: "Phno", text: "Phone Number",type:"tel" },
-    {id:3,name: "Mailid", text: "Email-ID",type:"email"},
+    {id:0, name: "Username", text: "Name",type:"text",placeholder:"Username"},
+    {id:1,name: "USRID", text: "Credo-ID",type:"text",placeholder:"Example:xoxo!456" },
+    {id:2, name: "Phno", text: "Phone Number",type:"tel",placeholder:"999999999" },
+    {id:3,name: "Mailid", text: "Email-ID",type:"email",placeholder:"exmaple@xoyo.com"},
   ];
-  const [errMsg,setErrormsg]=useState('');
-  const {Username,USRID,Phno,Mailid}=user;
+ const [errMsg,setErrormsg]=useState('');
+const {Username,USRID,Phno,Mailid}=user;
  const [invalidUsername,setErrMsgUsermname]=useState('');
  const [invalidMailId,setErrMsgMailId]=useState('');
  const [invalidUSRID,setErrMsgUSRID]=useState('');
@@ -42,7 +42,7 @@ const Form = (props) => {
               }
               
               props.handleFormSubmit(newuser);
-              errorMsg="Success"
+              errorMsg="Successfully Created"
             }
             else{
               errorMsg="No Empty Fields"
@@ -83,20 +83,24 @@ const Form = (props) => {
           }
           else{
             let errMsg=""
-            if(value.length<7 && (value.match("(?=.*[0-9]){1,}")||value.match("(?=.*[!|@|#|$|%|^|&|*]){1,}")) )
-              setErrMsgUSRID("Password must atleast have 8 characters (Alphabets numbers and special characters)");
-            else{
-              if(value.match("(?=.*[0-9]){1,}"))
-                errMsg="Must have atleast one special character";
-              else
-                errMsg="Must contain numbers and special characters "
-              
-             setErrMsgUSRID(errMsg);
-            }
+            if(value.length===0)
+              errMsg="User ID must atleast have 8 characters atleast One uppercase Alphabet,One lowercase numbers and special characters";
+           else if(!(value.match("(?=.*[0-9]){1,}"))) 
+              errMsg="User ID must have atleast one number";
+            else if(!(value.match(value.match("(?=.*[!|@|#|$|%|^|&|*]){1,}"))))
+              errMsg="User ID must contain atleast one special character"
+            else if(!(value.match("[A-Z]")))
+              errMsg="User ID must have atleast one Upper Case Alphabet"
+            else if(!(value.match("[a-z]")))
+              	errMsg="User ID must have atleast one Lower case Alphabet";
+            else if(value.length<8)
+              errMsg="User ID must contain atleast 8 characters"
+            
+            setErrMsgUSRID(errMsg);
           }
           break;
           case 'Phno':
-            if(value!==" " && value.match("[0-9]{10}")){
+            if(value!==" " && value.match("[0-9]{10}") && !(value.match("[0]{10}"))){
               SetNewUser((prevState)=>({
                 ...prevState,
                 [name]:value
@@ -124,7 +128,7 @@ const Form = (props) => {
     }
   }
   const errMsgs={Username:invalidUsername,Mailid:invalidMailId,USRID:invalidUSRID,Phno:invalidPhno}
-  const color=(errMsg==="Success")?"green":"red";
+  const color=(errMsg==="Successfully Created")?"green":"red";
   return (
     <div style={{margin:"10px"}}>
       {errMsg && <p className="ui segment" style={{fontSize:"8",backgroundColor:`${color}`,color:"white"}}>{errMsg}</p>}

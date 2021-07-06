@@ -6,7 +6,7 @@ import CreateUserForm from './CreateUserForm';
         Username:string;
         USRID:string;
         Phno:number;
-        Mail:string;
+        Mailid:string;
      }
     const onSubmitForm=(user:User)=>{
         console.log(user)
