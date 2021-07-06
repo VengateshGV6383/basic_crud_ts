@@ -1,10 +1,13 @@
 import React,{useState} from "react";
-import { User } from "./AddUser";
-
 import Button from "./button";
 import InputBox from "./InputBoxes";
 
-
+interface User{
+  Username:string;
+  USRID:string;
+  Phno:string;
+  Mailid:string;
+}
 interface FormProps {
   handleFormSubmit: (user: User) => void
 }
@@ -30,7 +33,7 @@ const Form = (props: FormProps) => {
     {id:3,name: "Mailid", text: "Email-ID",type:"email",placeholder:"exmaple@xoyo.com"},
   ];
  const [errMsg,setErrormsg]=useState('');
-const {Username,USRID,Phno,Mailid}=user;
+ const {Username,USRID,Phno,Mailid}=user;
  const [invalidUsername,setErrMsgUsermname]=useState('');
  const [invalidMailId,setErrMsgMailId]=useState('');
  const [invalidUSRID,setErrMsgUSRID]=useState('');

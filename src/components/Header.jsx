@@ -7,10 +7,10 @@ const Header = () => {
         <div className="ui segment" >
         <h1>Basic Crud Operations App</h1>
         <header style={{display:"flex"}}>
-            <div style={{margin:"5px"}}>
+            <div style={{margin:"5px"}} className="ui segment">
                 <NavLink to="/Create" >Create</NavLink>
             </div>
-            <div style={{margin:"5px"}}>
+            <div style={{margin:"5px"}} className="ui segment">
             <NavLink to="/Show">ShowUsers</NavLink>
             </div>
             
