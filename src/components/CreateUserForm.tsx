@@ -27,7 +27,7 @@ const Form = (props: FormProps) => {
     placeholder:string
     
   }>= [
-    {id:0, name: "Username", text: "Name",type:"text",placeholder:"Username"},
+    {id:0, name: "Username", text: "Username",type:"text",placeholder:"Username"},
     {id:1,name: "USRID", text: "Credo-ID",type:"text",placeholder:"Example:xoxo!456" },
     {id:2, name: "Phno", text: "Phone Number",type:"tel",placeholder:"999999999" },
     {id:3,name: "Mailid", text: "Email-ID",type:"email",placeholder:"exmaple@xoyo.com"},
@@ -100,7 +100,7 @@ const Form = (props: FormProps) => {
           else{
             let errMsg=""
             if(value.length===0)
-              errMsg="User ID must atleast have 8 characters atleast One uppercase Alphabet,One lowercase numbers and special characters";
+              errMsg="User ID must atleast have 8 characters atleast One Uppercase alphabet,One lowercase alphabet,numbers and special characters";
            else if(!(value.match("(?=.*[0-9]){1,}"))) 
               errMsg="User ID must have atleast one number";
             else if(!(value.match("(?=.*[!|@|#|$|%|^|&|*]){1,}")))

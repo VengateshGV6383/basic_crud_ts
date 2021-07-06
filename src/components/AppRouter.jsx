@@ -24,7 +24,8 @@ const AppRouter = () => {
                  render={(props)=>(
                    <ShowList {...props} users={users} setUsers={setUsers}/>
                  )}
-                 path="/show"
+                 path="/"
+                 exact={true}
                  
                  />
             

@@ -10,8 +10,8 @@ const Header = () => {
             <div style={{margin:"5px"}} className="ui segment">
                 <NavLink to="/Create" >Create</NavLink>
             </div>
-            <div style={{margin:"5px"}} className="ui segment">
-            <NavLink to="/Show">ShowUsers</NavLink>
+            <div style={{margin:"5px",borderColor:"Green",borderWidth:"2px"}} className="ui segment">
+            <NavLink to="/" style={{color:"green"}}>ShowUsers</NavLink>
             </div>
             
         </header>
