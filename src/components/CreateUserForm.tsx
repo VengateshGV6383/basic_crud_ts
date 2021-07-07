@@ -101,14 +101,14 @@ const Form = (props: FormProps) => {
             let errMsg=""
             if(value.length===0)
               errMsg="User ID must atleast have 8 characters atleast One Uppercase alphabet,One lowercase alphabet,numbers and special characters";
-           else if(!(value.match("(?=.*[0-9]){1,}"))) 
-              errMsg="User ID must have atleast one number";
-            else if(!(value.match("(?=.*[!|@|#|$|%|^|&|*]){1,}")))
-              errMsg="User ID must contain atleast one special character"
             else if(!(value.match("[A-Z]")))
               errMsg="User ID must have atleast one Upper Case Alphabet"
             else if(!(value.match("[a-z]")))
-              	errMsg="User ID must have atleast one Lower case Alphabet";
+              	errMsg="User ID must have atleast one Lower case Alphabet";  
+            else if(!(value.match("(?=.*[0-9]){1,}"))) 
+              errMsg="User ID must have atleast one number";
+            else if(!(value.match("(?=.*[!|@|#|$|%|^|&|*]){1,}")))
+              errMsg="User ID must contain atleast one special character"
             else if(value.length<8)
               errMsg="User ID must contain atleast 8 characters"
             
@@ -129,7 +129,7 @@ const Form = (props: FormProps) => {
             }
             break;
             case 'Mailid':
-              if(value!==" " && value.match("^[a-zA-Z0-9_.-]+@[a-zA-Z0-9.-]+$")){
+              if(value!==" " && value.match("^[a-zA-Z0-9+._-]+@[a-zA-Z0-9.-]+$")){
                 SetNewUser((prevState)=>({
                   ...prevState,
                   [name]:value

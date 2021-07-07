@@ -5,7 +5,7 @@ import './Header.css'
 const Header = () => {
     return (  
         <div className="ui segment" >
-        <h1 style={{color:"orange"}}>Basic Crud Operations App</h1>
+        <h1 style={{color:"orange"}}>React CRUD Operations App</h1>
         <header >
             <div>
                 <NavLink to="/Create"className="navlink" activeClassName="active-link" >Create</NavLink>

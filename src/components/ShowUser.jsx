@@ -1,5 +1,6 @@
 import React from 'react';
-import './Usercard.css'
+import './Usercard.css';
+
 const User=(props)=>{
     const {Username,USRID,Phno,Mailid,DeleteUser}=props
     const arr=[Username,USRID,Mailid,Phno]

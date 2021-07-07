@@ -3,8 +3,12 @@
   border: 2px solid whitesmoke;
   -webkit-box-shadow: 2px 2px 2px 2px gainsboro, 2px 2px 2px 2px whitesmoke;
           box-shadow: 2px 2px 2px 2px gainsboro, 2px 2px 2px 2px whitesmoke;
-  max-width: 270px;
+  min-width: 270px;
+  max-width: -webkit-max-content;
+  max-width: -moz-max-content;
+  max-width: max-content;
   padding: 5px;
+  margin: 10px;
   border-radius: 10px;
 }
 
