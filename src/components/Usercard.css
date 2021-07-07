@@ -1,0 +1,54 @@
+@import url("https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap");
+.user-card {
+  border: 2px solid whitesmoke;
+  -webkit-box-shadow: 2px 2px 2px 2px gainsboro, 2px 2px 2px 2px whitesmoke;
+          box-shadow: 2px 2px 2px 2px gainsboro, 2px 2px 2px 2px whitesmoke;
+  max-width: 270px;
+  padding: 5px;
+  border-radius: 10px;
+}
+
+.user-card .user-content .header {
+  margin: 10px;
+  padding: 5px;
+  color: orange;
+}
+
+.user-card .user-details {
+  border-top: 2px solid orange;
+  margin: 5px;
+}
+
+.user-card .user-details li {
+  padding: 10px;
+  list-style-type: none;
+  font-size: 1rem;
+  font-weight: 600;
+  font-family: "Josefin Sans", sans-serif;
+}
+
+.user-card .content {
+  margin: 5px;
+}
+
+.user-card .content .btn .edit-btn {
+  border-color: #4caf50;
+  color: #4caf50;
+}
+
+.user-card .content .btn .edit-btn:hover {
+  background-color: #4caf50 !important;
+  color: #ffff !important;
+}
+
+.user-card .content .btn .dlt-btn {
+  border-color: #f44336;
+  padding: 5px;
+  color: #4caf50;
+}
+
+.user-card .content .btn .dlt-btn:hover {
+  background-color: #f44336 !important;
+  color: #ffff !important;
+}
+/*# sourceMappingURL=Usercard.css.map */

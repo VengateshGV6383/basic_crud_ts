@@ -1,28 +1,30 @@
 import React from 'react';
+import './Usercard.css'
 const User=(props)=>{
     const {Username,USRID,Phno,Mailid,DeleteUser}=props
     const arr=[Username,USRID,Mailid,Phno]
     const properties=["Username","ID","Mailid","Phno"]
     return(
         
-            <div className="card" style={{padding:10,border:"2px solid whitesmoke",maxWidth:"270px"}}>
-                <div className="content">
-                    <div className="header" style={{padding:5}}>
-                        <h3>User Details</h3>
+            <div className="card user-card">
+                <div className="content user-content">
+                    <div className="header">
+                        <h3>USER DETAILS</h3>
                     </div>
                 </div>
+                <div className="user-details">
                 { arr.map(item=>{
                     return (
-                        <div className="description" style={{padding:"5px",color:"orange"}}>
-                        <h5>{properties[arr.indexOf(item)] } :{item}</h5> 
-                        </div>
+                    <li className="description">{properties[arr.indexOf(item)] } : {item}</li>
                     )
                 })
                }
-                <div className="extra content" style={{margin:"5px"}}>
-                    <div className="ui two buttons">
-                        <buttom className="ui basic green button">Edit</buttom>
-                        <button className="ui basic red button" onClick={()=>{DeleteUser(Phno)}}>Delete User</button>
+                </div>
+                
+                <div className="extra content">
+                    <div className="ui two buttons btn">
+                        <button className="ui basic green button edit-btn">Edit</button>
+                        <button className="ui basic red button dlt-btn" onClick={()=>{DeleteUser(Phno)}}>Delete User</button>
                     </div>
                 </div>
                 </div>
