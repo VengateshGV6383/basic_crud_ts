@@ -1,17 +1,17 @@
 import React from 'react';
 import {NavLink} from 'react-router-dom';
-
+import './Header.css'
 
 const Header = () => {
     return (  
         <div className="ui segment" >
         <h1>Basic Crud Operations App</h1>
-        <header style={{display:"flex"}}>
-            <div style={{margin:"5px"}} className="ui segment">
-                <NavLink to="/Create" >Create</NavLink>
+        <header >
+            <div>
+                <NavLink to="/Create"className="navlink" activeClassName="active-link" >Create</NavLink>
             </div>
-            <div style={{margin:"5px",borderColor:"Green",borderWidth:"2px"}} className="ui segment">
-            <NavLink to="/" style={{color:"green"}}>ShowUsers</NavLink>
+            <div>
+                <NavLink to="/" exact className="navlink" activeClassName="active-link">ShowUsers</NavLink>
             </div>
             
         </header>

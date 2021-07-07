@@ -1,0 +1,32 @@
+$border-color: #4caf50;
+$navigation-border-color: orange;
+$button-border-radius: 10px;
+$text-color: #ffff;
+$basic-font-size: 1rem;
+header {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  border: 1px solid $navigation-border-color;
+  font-size: $basic-font-size;
+  font-weight: bold;
+  padding: 10px;
+  padding-left: 1px;
+  .navlink {
+    padding: 10px;
+    color: $navigation-border-color;
+    border-color: transparent;
+    cursor: pointer;
+    border: 1px solid $button-border-radius;
+    &.active-link {
+      background-color: $navigation-border-color;
+      color: $text-color;
+    }
+    &:hover {
+      background-color: $navigation-border-color;
+      border-color: transparent;
+      cursor: pointer;
+      color: $text-color;
+    }
+  }
+}

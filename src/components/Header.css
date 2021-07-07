@@ -1,0 +1,37 @@
+header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -ms-flex-wrap: nowrap;
+      flex-wrap: nowrap;
+  border: 1px solid orange;
+  font-size: 1rem;
+  font-weight: bold;
+  padding: 10px;
+  padding-left: 1px;
+}
+
+header .navlink {
+  padding: 10px;
+  color: orange;
+  border-color: transparent;
+  cursor: pointer;
+  border: 1px solid 10px;
+}
+
+header .navlink.active-link {
+  background-color: orange;
+  color: #ffff;
+}
+
+header .navlink:hover {
+  background-color: orange;
+  border-color: transparent;
+  cursor: pointer;
+  color: #ffff;
+}
+/*# sourceMappingURL=Header.css.map */
