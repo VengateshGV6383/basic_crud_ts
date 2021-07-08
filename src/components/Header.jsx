@@ -6,7 +6,7 @@ const Header = () => {
     return (  
         <div className="ui segment" >
         <h1 style={{color:"orange"}}>React CRUD Operations App</h1>
-        <header >
+        <header>
             <div>
                 <NavLink to="/Create" className="navlink" activeClassName="active-link" >Create</NavLink>
             </div>

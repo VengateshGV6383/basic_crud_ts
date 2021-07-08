@@ -4,6 +4,7 @@ import Button from "./button";
 import InputBox from "./InputBoxes";
 
 interface User{
+
   Username:string;
   USRID:string;
   Phno:string;
@@ -15,6 +16,7 @@ interface FormProps {
 
 const Form = (props: FormProps) => {
   const [user,SetNewUser]=useState({
+
     Username:'',
     USRID:'',
     Phno:'',
@@ -34,11 +36,7 @@ const Form = (props: FormProps) => {
     {id:3,name: "Mailid", text: "Email-ID",type:"email",placeholder:"exmaple@xoyo.com"},
   ];
  const [errMsg,setErrormsg]=useState('');
- const {Username,USRID,Phno,Mailid}=user;
-//  const [invalidUsername,setErrMsgUsermname]=useState('');
-//  const [invalidMailId,setErrMsgMailId]=useState('');
-//  const [invalidUSRID,setErrMsgUSRID]=useState('');
-//  const [invalidPhno,setErrMsgPhno]=useState('');
+ 
  const intialState={
   UsernameerrMsg:"",
   USRIDerrMsg:"",
@@ -124,6 +122,7 @@ const Form = (props: FormProps) => {
 
   const onhandleSubmit=(event: React.FormEvent<HTMLFormElement>)=>{
             event.preventDefault();
+            const {Username,USRID,Phno,Mailid}=user;
             const values=[Username,USRID,Phno,Mailid];
             const noEmptyFields=values.every((field)=>{
                 let eachfield=`${field}`.trim();
@@ -137,7 +136,6 @@ const Form = (props: FormProps) => {
                 Phno,
                 Mailid
               }
-              
               props.handleFormSubmit(newuser);
               errorMsg="Successfully Created"
             }
@@ -150,7 +148,6 @@ const Form = (props: FormProps) => {
   const handleInputChange=(event:React.ChangeEvent<HTMLInputElement>)=>{
     setErrMsg(event)
   }
-
   const errMsgs={Username:state.UsernameerrMsg,Mailid:state.MaildiderrMsg,USRID:state.USRIDerrMsg,Phno:state.PhnoerrMsg}
   const color=(errMsg==="Successfully Created")?"green":"red";
   return (
@@ -169,9 +166,7 @@ const Form = (props: FormProps) => {
             
             />
           )
-        })}
-       
-        
+        })}        
         <Button name="Create" type="submit"/>
        </form>
     </div>
