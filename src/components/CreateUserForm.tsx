@@ -1,4 +1,5 @@
-import React,{useState} from "react";
+
+import React,{useState,useReducer} from "react";
 import Button from "./button";
 import InputBox from "./InputBoxes";
 
@@ -34,12 +35,92 @@ const Form = (props: FormProps) => {
   ];
  const [errMsg,setErrormsg]=useState('');
  const {Username,USRID,Phno,Mailid}=user;
- const [invalidUsername,setErrMsgUsermname]=useState('');
- const [invalidMailId,setErrMsgMailId]=useState('');
- const [invalidUSRID,setErrMsgUSRID]=useState('');
- const [invalidPhno,setErrMsgPhno]=useState('');
+//  const [invalidUsername,setErrMsgUsermname]=useState('');
+//  const [invalidMailId,setErrMsgMailId]=useState('');
+//  const [invalidUSRID,setErrMsgUSRID]=useState('');
+//  const [invalidPhno,setErrMsgPhno]=useState('');
+ const intialState={
+  UsernameerrMsg:"",
+  USRIDerrMsg:"",
+    PhnoerrMsg:"",
+    MailiderrMsg:""
+ }
 
+ const reducer=(errMsg:any,event:React.ChangeEvent<HTMLInputElement>)=>{
+  const {name,value}=event.target;
+  switch(name){
+    case 'Username':
+                if(value!==" " && value.length>=8){
+                  SetNewUser((prevState)=>({
+                    ...prevState,
+                    [name]:value
+                    
+                  }))
+                  return{...errMsg,UsernameerrMsg:" "}
+                }
+                else{
+                  if(value.length<8){
+                    return {...errMsg,UsernameerrMsg:"User name must be grater than 7 characters"}
+                  }
+                      
+                }
+      break;
+      case 'USRID': if(value.length>7 && value.match("(?=.*[A-Za-z0-9@!#$%^&*]){8,}")){
+                            SetNewUser((prevState)=>({
+                              ...prevState,
+                              [name]:value
+                              
+                            }))
+                            return{...errMsg,USRIDerrMsg:""}
+                          }
+                          else{
+                            let errorMsg=""
+                            if(value.length===0)
+                              errorMsg="User ID must atleast have 8 characters atleast One Uppercase alphabet,One lowercase alphabet,numbers and special characters";
+                            else if(!(value.match("[A-Z]")))
+                              errorMsg="User ID must have atleast one Upper Case Alphabet"
+                            else if(!(value.match("[a-z]")))
+                                errorMsg="User ID must have atleast one Lower case Alphabet";  
+                            else if(!(value.match("(?=.*[0-9]){1,}"))) 
+                              errorMsg="User ID must have atleast one number";
+                            else if(!(value.match("(?=.*[!|@|#|$|%|^|&|*]){1,}")))
+                              errorMsg="User ID must contain atleast one special character"
+                            else if(value.length<8)
+                              errorMsg="User ID must contain atleast 8 characters"
+                            
+                                return{...errMsg,USRIDerrMsg:errorMsg};
+                          }
+        
+         case 'Phno':
+             if(value !==" "&&  value.match("[0-9]{10}") && !(value.match("[0]{10}"))){
+              SetNewUser((prevState)=>({
+                ...prevState,
+                [name]:value
+                
+              }))
+                  return {...errMsg,PhnoerrMsg:" "}
+               }
+            else{
+                 return{...errMsg,PhnoerrMsg:"Enter a valid Phone number"};
 
+            }
+
+          case 'Mailid':
+            if(value!==" " && value.match("^[a-zA-Z0-9+._-]+@[a-zA-Z0-9.-]+$")){
+              SetNewUser((prevState)=>({
+                ...prevState,
+                [name]:value
+              }))
+              return {...errMsg,MailiderrMsg:" "}
+            }
+            else{
+              return {...errMsg,MailiderrMsg:"Enter a valid EmailID"}
+              
+            }
+            
+ }
+}
+ const [state,setErrMsg]=useReducer(reducer,intialState)
 
   const onhandleSubmit=(event: React.FormEvent<HTMLFormElement>)=>{
             event.preventDefault();
@@ -66,84 +147,11 @@ const Form = (props: FormProps) => {
             setErrormsg(errorMsg);
 
           }
-
-
-  
-  const handleInputChange=(event: React.ChangeEvent<HTMLInputElement>)=>{
-    const {name,value}=event.target;
-    switch(name){
-      case 'Username':
-        if(value!==" " && value.length>=8){
-          SetNewUser((prevState)=>({
-            ...prevState,
-            [name]:value
-            
-          }))
-          setErrMsgUsermname(" ");
-        }
-        else{
-          if(value.length<8){
-            setErrMsgUsermname("UserName must be greater than 7 characters");
-          }
-              
-        }
-        break;
-        case 'USRID':
-          if(value.length>7 && value.match("(?=.*[A-Za-z0-9@!#$%^&*]){8,}")){
-            SetNewUser((prevState)=>({
-              ...prevState,
-              [name]:value
-              
-            }))
-            setErrMsgUSRID(" ")
-          }
-          else{
-            let errMsg=""
-            if(value.length===0)
-              errMsg="User ID must atleast have 8 characters atleast One Uppercase alphabet,One lowercase alphabet,numbers and special characters";
-            else if(!(value.match("[A-Z]")))
-              errMsg="User ID must have atleast one Upper Case Alphabet"
-            else if(!(value.match("[a-z]")))
-              	errMsg="User ID must have atleast one Lower case Alphabet";  
-            else if(!(value.match("(?=.*[0-9]){1,}"))) 
-              errMsg="User ID must have atleast one number";
-            else if(!(value.match("(?=.*[!|@|#|$|%|^|&|*]){1,}")))
-              errMsg="User ID must contain atleast one special character"
-            else if(value.length<8)
-              errMsg="User ID must contain atleast 8 characters"
-            
-            setErrMsgUSRID(errMsg);
-          }
-          break;
-          case 'Phno':
-            if(value!==" " && value.match("[0-9]{10}") && !(value.match("[0]{10}"))){
-              SetNewUser((prevState)=>({
-                ...prevState,
-                [name]:value
-              }))
-              setErrMsgPhno(" ")
-            }
-
-            else{
-              setErrMsgPhno("Enter a valid Phone number");
-            }
-            break;
-            case 'Mailid':
-              if(value!==" " && value.match("^[a-zA-Z0-9+._-]+@[a-zA-Z0-9.-]+$")){
-                SetNewUser((prevState)=>({
-                  ...prevState,
-                  [name]:value
-                }))
-                setErrMsgMailId(" ");
-              }
-              else{
-                setErrMsgMailId("Enter a valid mailid")
-              }
-              break;
-        default:{<p>Oops something went wrong!</p>}
-    }
+  const handleInputChange=(event:React.ChangeEvent<HTMLInputElement>)=>{
+    setErrMsg(event)
   }
-  const errMsgs={Username:invalidUsername,Mailid:invalidMailId,USRID:invalidUSRID,Phno:invalidPhno}
+
+  const errMsgs={Username:state.UsernameerrMsg,Mailid:state.MaildiderrMsg,USRID:state.USRIDerrMsg,Phno:state.PhnoerrMsg}
   const color=(errMsg==="Successfully Created")?"green":"red";
   return (
     <div style={{margin:"10px"}}>
