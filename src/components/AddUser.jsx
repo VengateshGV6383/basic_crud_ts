@@ -15,8 +15,11 @@ import CreateUserForm from './CreateUserForm';
         }
        
          setUsers([user,...users])
+         setTimeout(()=>{
+            history.push('/')
+         },1000)
          localStorage.setItem("userid",parseInt(localStorage.getItem("userid"))+1)
-         history.push('/')
+
     }
      return(
          <React.Fragment>

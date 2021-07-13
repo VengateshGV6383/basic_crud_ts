@@ -1,9 +1,11 @@
 import React from 'react';
 import User from './ShowUser';
 import "./ShowList.css";
+
 const ShowList = ({users,setUsers}) => {
-    const onDeleteUser=(Phno)=>{
-        setUsers(users.filter(user=>user.Phno!==Phno))
+    const onDeleteUser=(id)=>{
+        setUsers(users.filter(user=>user.id!==id))
+    
     }
     return ( 
     <React.Fragment>

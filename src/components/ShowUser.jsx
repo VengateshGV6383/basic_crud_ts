@@ -1,9 +1,10 @@
 import React from 'react';
 import './Usercard.css';
-
+import { useHistory } from 'react-router';
 const User=(props)=>{
-    const {Username,USRID,Phno,Mailid,DeleteUser}=props
+    const {id,Username,USRID,Phno,Mailid,DeleteUser}=props
     const arr=[Username,USRID,Mailid,Phno]
+    const history=useHistory();
     const properties=["Username","ID","Mailid","Phno"]
     return(
         
@@ -24,8 +25,8 @@ const User=(props)=>{
                 
                 <div className="extra content">
                     <div className="ui two buttons btn">
-                        <button className="ui basic green button edit-btn">Edit</button>
-                        <button className="ui basic red button dlt-btn" onClick={()=>{DeleteUser(Phno)}}>Delete User</button>
+                        <button className="ui basic green button edit-btn" onClick={()=>history.push(`/edit/${id}`)}>Edit</button>
+                        <button className="ui basic red button dlt-btn" onClick={()=>{DeleteUser(id)}}>Delete User</button>
                     </div>
                 </div>
                 </div>

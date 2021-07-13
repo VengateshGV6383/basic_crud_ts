@@ -4,6 +4,7 @@ import Header from './Header';
 import AddUser from './AddUser';
 import ShowList from './ShowList';
 import useLocalStorage from './hooks/useLocalStorage';
+import EditUser from './EditUser';
 
 const AppRouter = () => {
   const [users,setUsers]=useLocalStorage('users',[])
@@ -26,6 +27,13 @@ const AppRouter = () => {
                  path="/"
                  exact={true}
                  
+                 />
+                 <Route
+                 render={(props)=>(
+                   <EditUser {...props} users={users} setUsers={setUsers}/>
+                 )}
+                 path="/edit/:id"
+                
                  />
             
         </Switch>
