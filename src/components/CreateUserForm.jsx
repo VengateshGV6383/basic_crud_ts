@@ -59,15 +59,15 @@ const CreateUserForm = ({existingUser,handleFormSubmit}) => {
                                 state.USRIDmsg="User ID must have  one Lower case Alphabet";  
                             else if(!(user[fields].match("(?=.*[0-9]){1,}"))) 
                               state.USRIDmsg="User ID must have atleast one number";
-                            else if(!(user[fields].match("(?=.*[!|@|#|$|%|^|&|*]){1,}")))
-                              state.USRIDmsg="User ID must have one special character";
+                            else if(!(user[fields].match("(?=.*[!|@|#|$|%|^|&|*|_]){1,}")))
+                              state.USRIDmsg="User ID must have one special characters from [!,@,#,$,&,*,_,^,%]";
                             else if(user[fields].length<8)
                               state.USRIDmsg="User ID must contain atleast 8 characters";
                             else state.USRIDmsg=" "
                               break;
 
          case 'Phno':
-              if(user[fields].length<10) state.Phnomsg="Phone number  must me 10 digits";
+              if(!user[fields].match("[0-9]{10,}")) state.Phnomsg="Phone number  must me 10 digits";
               else state.Phnomsg=" ";
               break;
           case 'Mailid':
