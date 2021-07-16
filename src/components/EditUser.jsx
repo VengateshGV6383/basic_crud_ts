@@ -11,7 +11,6 @@ const EditUser = ({history,users,setUsers}) => {
         history.push('/');
     }
     
-    console.log(userTobeUpdated);
     return (
         <div>
             <CreateUserForm existingUser={userTobeUpdated} handleFormSubmit={onSubmitForm}/>

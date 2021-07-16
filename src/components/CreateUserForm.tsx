@@ -1,77 +1,82 @@
 
-import React,{useState,useReducer,useRef} from "react";
+import React,{useState,useReducer,useRef , ChangeEvent} from "react";
 import Button from "./button";
 import InputBox from "./InputBoxes";
-// interface User{
-
-//   Username:string;
-//   USRID:string;
-//   Phno:string;
-//   Mailid:string;
-// }// // const fieldsconst fields: Array<{
-  //   id:number,
-  //   name:"Username"|"USRID"|"Phno"|"Mailid",
-  //   text:string,
-  //   type:"text"|"tel"|"email",
-  //   placeholder:string
-    
-  // }>= //: User
-
-
-const CreateUserForm = ({existingUser,handleFormSubmit}) => {
+interface User{
+   Username:string;
+  USRID:string;
+ Phno:string;
+  Mailid:string;
+ }
+ 
+interface Props{
+  existingUser:any;
+  handleFormSubmit:(user:User)=>void
+}
+interface Usermsg{
+  Usrmsg:String,USRIDmsg:String,Phnomsg:String,Mailidmsg:String
+ }
+const CreateUserForm = (props:Props) => {
+ const {existingUser,handleFormSubmit}=props;
   const [user,SetNewUser]=useState({
 
     Username: existingUser?existingUser.Username:'',
-    USRID: existingUser?existingUser.USRID:'',
+   USRID: existingUser?existingUser.USRID:'',
     Phno: existingUser?existingUser.Phno:'',
     Mailid: existingUser?existingUser.Mailid:''
   })
   
-  const fields= [
+  const fields:Array<{
+    id:number,
+       name:"Username"|"USRID"|"Phno"|"Mailid",
+       text:string,
+       type:"text"|"tel"|"email",
+       placeholder:string
+    }>=[
     {id:0, name: "Username", text: "Username",type:"text",placeholder:"Username"},
     {id:1,name: "USRID", text: "Credo-ID",type:"text",placeholder:"Example:xoxo!456" },
     {id:2, name: "Phno", text: "Phone Number",type:"tel",placeholder:"999999999" },
     {id:3,name: "Mailid", text: "Email-ID",type:"email",placeholder:"exmaple@xoyo.com"},
   ];
- const refBtn=useRef(null);
+ const refBtn=useRef<HTMLButtonElement>(null);
  const [submitState,setSubmitState]=useState('')
- const intialState={
+ 
+ const intialState:Usermsg={
   Usrmsg:" ",
   USRIDmsg:" ",
   Phnomsg:" ",
   Mailidmsg:" "
  }
 
- const reducer=(state,fields)=>{
-   //console.log(state,fields)
+ const reducer=(state:Usermsg,fields:String):Usermsg=>{
   switch(fields){
     case 'Username':
-        if(user[fields].length<8) state.Usrmsg="Username must have atleast 8 characters"; 
+        if(user["Username"].length<8) state.Usrmsg="Username must have atleast 8 characters"; 
         else state.Usrmsg=" ";
         break;
     
       case 'USRID':
-                            if(user[fields].length===0)
+                            if(user["USRID"].length===0)
                               state.USRIDmsg="User ID must have 8 characters atleast One Uppercase alphabet,One lowercase alphabet,numbers and special characters";
-                            else if(!(user[fields].match("[A-Z]")))
+                            else if(!(user["USRID"].match("[A-Z]")))
                               state.USRIDmsg="User ID must have  one Upper Case Alphabet";
-                            else if(!(user[fields].match("[a-z]")))
+                            else if(!(user["USRID"].match("[a-z]")))
                                 state.USRIDmsg="User ID must have  one Lower case Alphabet";  
-                            else if(!(user[fields].match("(?=.*[0-9]){1,}"))) 
+                            else if(!(user["USRID"].match("(?=.*[0-9]){1,}"))) 
                               state.USRIDmsg="User ID must have atleast one number";
-                            else if(!(user[fields].match("(?=.*[!|@|#|$|%|^|&|*|_]){1,}")))
+                            else if(!(user["USRID"].match("(?=.*[!|@|#|$|%|^|&|*|_]){1,}")))
                               state.USRIDmsg="User ID must have one special characters from [!,@,#,$,&,*,_,^,%]";
-                            else if(user[fields].length<8)
+                            else if(user["USRID"].length<8)
                               state.USRIDmsg="User ID must contain atleast 8 characters";
                             else state.USRIDmsg=" "
                               break;
 
          case 'Phno':
-              if(!user[fields].match("[0-9]{10,}")) state.Phnomsg="Phone number  must me 10 digits";
+              if(!user["Phno"].match("[0-9]{10,}")) state.Phnomsg="Phone number  must me 10 digits";
               else state.Phnomsg=" ";
               break;
           case 'Mailid':
-            if (!user[fields].match("^[a-zA-Z0-9+._-]+@[a-zA-Z0-9.-]+$"))
+            if (!user["Mailid"].match("^[a-zA-Z0-9+._-]+@[a-zA-Z0-9.-]+$"))
               state.Mailidmsg="Enter a valid mailid";
             else
               state.Mailidmsg=" ";
@@ -100,14 +105,15 @@ const CreateUserForm = ({existingUser,handleFormSubmit}) => {
     })
     return (noerrors && noemptyFields);
   }
-  const onhandleSubmit=(event)=>{
+  const onhandleSubmit=(event:React.FormEvent<HTMLFormElement>)=>{
             event.preventDefault();
             //boolean
             let errorFields=handleErrors();
-            let errorMsg=[];
+            let errorMsg=" ";
             if(errorFields){
-              refBtn.current.style.filter="opacity(30%)";
-              const newuser={
+              if(refBtn.current!==null)
+                  refBtn.current.style.filter="opacity(30%)";
+              const newuser:User={
                 Username,
                 USRID,
                 Phno,
@@ -118,14 +124,15 @@ const CreateUserForm = ({existingUser,handleFormSubmit}) => {
             }
             else{
               errorMsg="Nomore errors or empty fields should occur";
-              refBtn.current.style.filter="opacity(30%)";
+              if(refBtn.current!==null)
+                  refBtn.current.style.filter="opacity(30%)";
               
               
             }
             setSubmitState(errorMsg);
 
           }
-  const handleInputChange=(event)=>{
+  const handleInputChange=(event:ChangeEvent<HTMLFormElement>)=>{
 
     const{name,value}=event.target;
     switch(name){

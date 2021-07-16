@@ -13,7 +13,7 @@ import CreateUserForm from './CreateUserForm';
             localStorage.setItem("userid",0)
             user["id"]=String(0)
         }
-       
+         
          setUsers([user,...users])
          setTimeout(()=>{
             history.push('/')
@@ -23,7 +23,7 @@ import CreateUserForm from './CreateUserForm';
     }
      return(
          <React.Fragment>
-             <CreateUserForm handleFormSubmit={onSubmitForm}/>
+             <CreateUserForm existingUser={null} handleFormSubmit={onSubmitForm}/>
          </React.Fragment>
      )
  }
