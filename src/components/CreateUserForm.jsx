@@ -51,8 +51,6 @@ const CreateUserForm = ({existingUser,handleFormSubmit}) => {
         break;
     
       case 'USRID':
-                          
-                        
                             if(user[fields].length===0)
                               state.USRIDmsg="User ID must have 8 characters atleast One Uppercase alphabet,One lowercase alphabet,numbers and special characters";
                             else if(!(user[fields].match("[A-Z]")))
@@ -67,8 +65,7 @@ const CreateUserForm = ({existingUser,handleFormSubmit}) => {
                               state.USRIDmsg="User ID must contain atleast 8 characters";
                             else state.USRIDmsg=" "
                               break;
-    
-        
+
          case 'Phno':
               if(user[fields].length<10) state.Phnomsg="Phone number  must me 10 digits";
               else state.Phnomsg=" ";

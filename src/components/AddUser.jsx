@@ -7,11 +7,11 @@ import CreateUserForm from './CreateUserForm';
     const onSubmitForm=(user)=>{
        if(localStorage.getItem("userid")){
             let value = parseInt(localStorage.getItem("userid"))
-            user["id"]=value;
+            user["id"]=value.toString();
        }
         else{
             localStorage.setItem("userid",0)
-            user["id"]=0
+            user["id"]=String(0)
         }
        
          setUsers([user,...users])
