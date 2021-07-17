@@ -13,7 +13,7 @@ interface Props{
   existingUser:any;
   handleFormSubmit:(user:User)=>void
 }
-interface Usermsg{
+interface FieldErrormsg{
   Usrmsg:String,USRIDmsg:String,Phnomsg:String,Mailidmsg:String
  }
 const CreateUserForm = (props:Props) => {
@@ -41,45 +41,45 @@ const CreateUserForm = (props:Props) => {
  const refBtn=useRef<HTMLButtonElement>(null);
  const [submitState,setSubmitState]=useState('')
  
- const intialState:Usermsg={
+ const intialState:FieldErrormsg={
   Usrmsg:" ",
   USRIDmsg:" ",
   Phnomsg:" ",
   Mailidmsg:" "
  }
 
- const reducer=(state:Usermsg,fields:String):Usermsg=>{
-  switch(fields){
-    case 'Username':
-        if(user["Username"].length<8) state.Usrmsg="Username must have atleast 8 characters"; 
-        else state.Usrmsg=" ";
+ const reducer=(state:FieldErrormsg,action:{type:string}):FieldErrormsg=>{
+  switch(action.type){
+    case 'ChangeUsernameError':
+        if(user["Username"].length<8) state={...state,Usrmsg:"Username must have atleast 8 characters"}; 
+        else state={...state,Usrmsg:" "};
         break;
     
-      case 'USRID':
+      case 'ChangeUSRIDError':
                             if(user["USRID"].length===0)
-                              state.USRIDmsg="User ID must have 8 characters atleast One Uppercase alphabet,One lowercase alphabet,numbers and special characters";
+                              state={...state,USRIDmsg:"User ID must have 8 characters atleast One Uppercase alphabet,One lowercase alphabet,numbers and special characters"};
                             else if(!(user["USRID"].match("[A-Z]")))
-                              state.USRIDmsg="User ID must have  one Upper Case Alphabet";
+                              state={...state,USRIDmsg:"User ID must have  one Upper Case Alphabet"};
                             else if(!(user["USRID"].match("[a-z]")))
-                                state.USRIDmsg="User ID must have  one Lower case Alphabet";  
+                                state={...state,USRIDmsg:"User ID must have  one Lower case Alphabet"};  
                             else if(!(user["USRID"].match("(?=.*[0-9]){1,}"))) 
-                              state.USRIDmsg="User ID must have atleast one number";
+                              state={...state,USRIDmsg:"User ID must have atleast one number"};
                             else if(!(user["USRID"].match("(?=.*[!|@|#|$|%|^|&|*|_]){1,}")))
-                              state.USRIDmsg="User ID must have one special characters from [!,@,#,$,&,*,_,^,%]";
+                              state={...state,USRIDmsg:"User ID must have one special characters from [!,@,#,$,&,*,_,^,%]"};
                             else if(user["USRID"].length<8)
-                              state.USRIDmsg="User ID must contain atleast 8 characters";
-                            else state.USRIDmsg=" "
+                              state={...state,USRIDmsg:"User ID must contain atleast 8 characters"};
+                            else state={...state,USRIDmsg:" "}
                               break;
 
-         case 'Phno':
-              if(!user["Phno"].match("[0-9]{10,}")) state.Phnomsg="Phone number  must me 10 digits";
-              else state.Phnomsg=" ";
+         case 'ChangePhnoError':
+              if(!user["Phno"].match("[0-9]{10,}")) state={...state,Phnomsg:"Must have 10 characters within [0-9]"};
+              else state={...state,Phnomsg:" "};
               break;
-          case 'Mailid':
+          case 'ChangeMailidError':
             if (!user["Mailid"].match("^[a-zA-Z0-9+._-]+@[a-zA-Z0-9.-]+$"))
-              state.Mailidmsg="Enter a valid mailid";
+              state={...state,Mailidmsg:"Enter a valid mailid"};
             else
-              state.Mailidmsg=" ";
+              state={...state,Mailidmsg:" "};
               break;
           default:break;
             
@@ -168,7 +168,7 @@ const CreateUserForm = (props:Props) => {
       break;
       default:break;
     }
-    setErrMsg(name);
+    setErrMsg({type:`Change${name}Error`});
   }
  const errMsgs={Username:errMessage["Usrmsg"],Mailid:errMessage.Mailidmsg,USRID:errMessage.USRIDmsg,Phno:errMessage.Phnomsg}
 
